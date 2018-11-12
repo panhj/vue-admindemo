@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Layout from './views/Layout'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
     scrollBehavior: () => ({ y: 0 }),
     routes: [
-        {path: '/login', component: login},
+        {path: '/login', component: () => import('@/views/Login')},
         {
             path: '/',
             redirect:'/homeConfig',
@@ -28,11 +29,11 @@ export default new VueRouter({
                             path: 'homeConfig/addBanner',
                             name: 'addBanner',
                             meta: {'title': '新增Banner'},
-                            component: () => import('@/views/homneCofig/addBanner')
+                            component: () => import('@/views/homeConfig/pages/addBanner')
                         }
                     ]
                 }
-            ]
+            ] 
         }
     ]
 })
