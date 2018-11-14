@@ -14,29 +14,67 @@
         <sidebar></sidebar>
     </div>
     <div class="container">
-        
+        <pageTags class="pageTags">
+            <tag-item v-for="item in tags"
+            :key=item.path
+            :to=item.path
+            :title=item.name
+            @close="closetag"></tag-item>
+        </pageTags>
+        <breadcrumb class="breadcrumb"></breadcrumb>
+        <transition name="fade">
+            <router-view class="content"></router-view>
+        </transition>
     </div>
 
-    <transition name="fade">
-        <router-view class=""></router-view>
-    </transition>
 </div>
 </template>
 
 <script>
 import sidebar from '../components/sidebar'
+import pageTags from '../components/pageTags/pageTags'
+import tagItem from '../components/pageTags/tagItem'
+import breadcrumb from '../components/breadcrumb'
 
 export default {
     components: {
         sidebar,
+        pageTags,
+        'tag-item': tagItem,
+        breadcrumb
     },
     data () {
         return {
-
+            tags: [
+                {path: '/homeConfig', name: '首页配置'}
+            ]
         }
     },
     computed: {
 
+    },
+    methods: {
+        closetag: function (to) {
+            let index = this.tagIndexOf(to);
+            this.tags.splice(index, 1);
+            if(index < 1) return;
+            let prePath = this.tags[index-1].path;
+            this.$router.push({path: prePath});
+        },
+        tagIndexOf: function (to) {
+            for(let i = 0; i < this.tags.length; i++) {
+                if(this.tags[i].path == to) return i;
+            }
+            return -1;
+        }
+    },
+    watch: {
+        '$route': function (newval) {
+            let index = this.tagIndexOf(newval.path);
+            if(index == -1) {
+                this.tags.push({path: newval.path, name: newval.meta.title})
+            }
+        }
     }
     
 }
@@ -101,7 +139,19 @@ export default {
 .container {
     position: absolute;
     left: 250px; right: 0;
-    background-color:#999;
+    .pageTags {
+        width: 100%;
+    }
+    .breadcrumb {
+        position: relative;
+        padding: 10px 25px;
+        margin: 10px 0;
+    }
+    .content {
+        position: absolute;
+        left: 0; right: 0;
+        padding: 0 25px;
+    }
 }
 </style>
 

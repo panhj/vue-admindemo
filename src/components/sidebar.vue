@@ -21,8 +21,8 @@ active-text-color="#ffd04b"
             <i class="el-icon-location"></i>
             <span>需求管理</span>
         </template>
-        <el-menu-item index="/homeConfig/account">账号申请</el-menu-item>
-        <el-menu-item index="/homeConfig/problem">问题反馈</el-menu-item>
+        <el-menu-item index="/demand/account">账号申请</el-menu-item>
+        <el-menu-item index="/demand/problem">问题反馈</el-menu-item>
     </el-submenu>
     <el-menu-item index="/product">
         <i class="el-icon-location"></i>
@@ -40,7 +40,7 @@ active-text-color="#ffd04b"
         data () {
             return {
                 isroute: true,
-                unique: true
+                unique: false
             }
         }
     }

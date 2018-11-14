@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from './views/Layout'
-import banner from './views/homeConfig/pages/banner.vue'
-import config from './views/homeConfig/homeConfig'
 
 Vue.use(VueRouter)
 
@@ -40,7 +38,27 @@ export default new VueRouter({
                             component: () => import('@/views/homeConfig/pages/addBanner')
                         }
                     ]
-                }
+                },
+                {
+                    path: '/demand',
+                    name: 'demand',
+                    meta: {'title': '需求管理'},
+                    component: () => import('@/views/demand/demand'),
+                    children: [
+                        {
+                            path: '/demand/account',
+                            name: 'account',
+                            meta: {'title': '账号申请'},
+                            component: () => import('@/views/demand/pages/account')
+                        },
+                        {
+                            path: '/demand/problem',
+                            name: 'problem',
+                            meta: {'title': '问题反馈'},
+                            component: () => import('@/views/demand/pages/problem')
+                        }
+                    ]
+                },
             ] 
         }
     ]
