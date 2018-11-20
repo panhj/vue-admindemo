@@ -2,9 +2,9 @@
 <el-menu
 :default-active="$route.path"
 class="el-menu-vertical-demo"
-background-color="#545c64"
-text-color="#aaa"
-active-text-color="#ffd04b"
+background-color="#37414f"
+text-color="#aab5c7"
+active-text-color="#fff"
 :unique-opened="unique"
 :router="isroute">
     <el-submenu index="/homeConfig">
@@ -50,5 +50,8 @@ active-text-color="#ffd04b"
 .el-menu {
     border: none;
     height:100%;
+}
+.el-menu--inline .el-menu-item {
+    background-color: #252b33 !important;
 }
 </style>

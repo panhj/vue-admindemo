@@ -6,8 +6,8 @@
             <span>大华视频物联能力开放平台</span>
         </div>
         <div class="user">
-            <span class="name">Username</span>
-            <span class="logout"></span>
+            <span class="name">Administrator</span>
+            <a class="logout" href="#/login">登出</a>
         </div>
     </div>
     <div class="sidebar">
@@ -85,11 +85,11 @@ export default {
     position: relative;
     height: 60px;
     width: 100%;
-    background-color: #5f6a75;
+    background-color: #424f61;
     z-index: 99;
     .logo {
         position: absolute;
-        left: 0; top: 0;
+        left: 10px; top: 0;
         width: 350px;
         height: 100%;
         i {
@@ -98,11 +98,13 @@ export default {
             left: 0;
             width: 60px;
             height: 60px;
-            background: #888;
-            
+            background-image: url('../assets/img/logo.png');
+            background-repeat: no-repeat;
+            background-position: 9px 9px;
+            background-size: 42px 42px;
         }
         span {
-            padding-left: 50px;
+            padding-left: 30px;
             font-size: 21px;
             color: #fff;
             line-height: 60px;
@@ -112,11 +114,12 @@ export default {
         position:absolute;
         top: 0; right: 0px;
         height: 100%; 
-        span {
+        span, a {
             display: inline-block;
             line-height: 60px;
             font-size: 18px;
             color: #ccc;
+            text-decoration: none;
         }
         .name {
             width: 150px;

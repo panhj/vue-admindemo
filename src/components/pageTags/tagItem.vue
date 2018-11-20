@@ -40,9 +40,10 @@ li a {
 }
 li a:nth-child(2) {
     padding: 0 5px;
-    margin-right: 10px;
+    margin-right: 12px;
     cursor: pointer;
     font-size: 18px;
+    transform: scaleY(.86);
 }
 .active {
     background-color: #fff;
