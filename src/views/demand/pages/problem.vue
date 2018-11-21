@@ -65,16 +65,7 @@
 export default {
     data () {
         return {
-            tableData: [{
-                problem: '我的问题是我的网站炸了',
-                type: '售前咨询',
-                status: '已读',
-                author: '王小虎',
-                tell: '13600567213',
-                address: 'm13600567213@126.com',
-                time: '2018-11-15',
-                oprate: '查看'
-            },
+            tableData: [
             ]
         }
     },
@@ -87,7 +78,20 @@ export default {
                     'Content-Type': 'application/json'
                 }
             }).then(response => {
-                console.log(response.data);
+                let list = response.data.data;
+                console.log(list);
+                for(let item of list) {
+                    this.tableData.push({
+                        problem: item.description,
+                        type: item.category,
+                        status: '未读',
+                        author: item.name,
+                        tell: item.tel,
+                        address: item.mail,
+                        time: '2018-11-15',
+                        oprate: '查看'
+                    })
+                }
             }).catch(e => {
                 console.error(e);
             })
