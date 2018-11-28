@@ -58,6 +58,13 @@
             label="操作">
         </el-table-column>
     </el-table>
+    <div class="pagination">
+        <el-pagination
+        layout="prev, pager, next"
+        :total="total"
+        @current-change="getPage">
+        </el-pagination>
+    </div>
 </div>    
 </template>
 
@@ -65,6 +72,8 @@
 export default {
     data () {
         return {
+            currentPage: 1,
+            total:50,
             tableData: [
             ]
         }
@@ -73,7 +82,7 @@ export default {
         getList () {
             this.$axios({
                 method: 'get',
-                url: '/api/openeco/Inquiry/getQuestions',
+                url: 'Inquiry/getQuestions/' + this.currentPage + '/10',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -95,6 +104,9 @@ export default {
             }).catch(e => {
                 console.error(e);
             })
+        },
+        getPage (p) {
+            alert('还没做，当前页：'+p)
         }
     },
     mounted () {
@@ -111,5 +123,8 @@ export default {
 <style scoped>
 .table .el-table {
     border: 1px solid #ebeef5;
+}
+.pagination {
+    margin-top: 20px;
 }
 </style>

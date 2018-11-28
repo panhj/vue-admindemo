@@ -10,7 +10,7 @@ export default new VueRouter({
         {path: '/login', component: () => import('@/views/Login')},
         {
             path: '/',
-            redirect:'/homeConfig',
+            redirect:'/demand/problem',
             component: Layout,
             children: [
                 {
