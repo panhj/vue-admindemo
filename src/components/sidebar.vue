@@ -14,7 +14,7 @@ active-text-color="#fff"
         </template>
         <el-menu-item index="/homeConfig/banner">Banner配置</el-menu-item>
         <el-menu-item index="/homeConfig/platform">平台服务</el-menu-item>
-        <el-menu-item index="/homeConfig/apply">行业应用</el-menu-item>
+        <!-- <el-menu-item index="/homeConfig/apply">行业应用</el-menu-item> -->
     </el-submenu>
     <el-submenu index="/demand">
         <template slot="title">

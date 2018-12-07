@@ -1,5 +1,5 @@
 <template>
 <div>
-    <p>addBanner test</p>
+    <p>平台应用--敬请期待</p>
 </div>
 </template>

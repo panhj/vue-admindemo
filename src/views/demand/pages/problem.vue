@@ -87,7 +87,7 @@ export default {
                     'Content-Type': 'application/json'
                 }
             }).then(response => {
-                let list = response.data.data;
+                let list = response.data.data.userQuestions;
                 console.log(list);
                 for(let item of list) {
                     this.tableData.push({

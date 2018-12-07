@@ -59,6 +59,18 @@ export default new VueRouter({
                         }
                     ]
                 },
+                {
+                    path: '/product',
+                    name: 'product',
+                    meta: {'title': '产品服务'},
+                    component: () => import('@/views/product/product'),
+                },
+                {
+                    path: '/message',
+                    name: 'message',
+                    meta: {'title': '信息发布'},
+                    component: () => import('@/views/message/message'),
+                },
             ] 
         }
     ]

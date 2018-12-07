@@ -46,7 +46,7 @@ export default {
     data () {
         return {
             tags: [
-                {path: '/homeConfig', name: '首页配置'}
+                // {path: '/homeConfig', name: '首页配置'}
             ]
         }
     },
@@ -75,8 +75,11 @@ export default {
                 this.tags.push({path: newval.path, name: newval.meta.title})
             }
         }
+    },
+    mounted () {
+         this.tags.push({path: this.$route.path, name: this.$route.meta.title})
+         console.log(this.$route)
     }
-    
 }
 </script>
 
