@@ -73,7 +73,7 @@ export default {
     data () {
         return {
             currentPage: 1,
-            total:50,
+            total:10,
             tableData: [
             ]
         }
@@ -88,7 +88,7 @@ export default {
                 }
             }).then(response => {
                 let list = response.data.data.userQuestions;
-                console.log(list);
+                this.total = response.data.data.count;
                 for(let item of list) {
                     this.tableData.push({
                         problem: item.description,
