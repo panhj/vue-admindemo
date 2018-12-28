@@ -123,7 +123,7 @@ export default {
                         author: item.name,
                         tell: item.tel,
                         address: item.mail,
-                        time: '2018-11-15',
+                        time: item.date,
                     })
                 }
             }).catch(e => {
