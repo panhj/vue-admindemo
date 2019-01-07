@@ -25,4 +25,4 @@ npm run test
 npm run lint
 ```
 
-![image](https://github.com/panhj/vue-admindemo/raw/master/screenshot/adminPNG.png)
+![image](https://github.com/panhj/vue-admindemo/raw/master/screenshot/adminPNG.PNG)
