@@ -120,7 +120,7 @@ export default {
         span, a {
             display: inline-block;
             line-height: 60px;
-            font-size: 18px;
+            font-size: 16px;
             color: #ccc;
             text-decoration: none;
         }

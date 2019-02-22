@@ -12,52 +12,40 @@
             :index="1">
         </el-table-column>
         <el-table-column
-            prop="problem"
-            label="问题"
-            align="left"
+            prop="companyTypeString"
+            label="单位类型"
+            align="center"
             :show-overflow-tooltip="true"
-            min-width="300">
+            min-width="30">
         </el-table-column>
          <el-table-column
-            prop="type"
-            label="类型"
+            prop="coopRange"
+            label="合作内容"
             align="center"
-            width="120">
+            min-width="20">
         </el-table-column>
          <el-table-column
-            prop="status"
-            label="状态"
+            prop="important"
+            label="重要程度"
             align="center"
-            width="80">
+            min-width="10">
         </el-table-column>
          <el-table-column
-            prop="author"
-            label="反馈者"
+            prop="tradeTypeString"
+            label="所属行业线"
             align="center"
-            width="120">
+            min-width="25">
         </el-table-column>
          <el-table-column
-            prop="tell"
-            label="联系电话"
+            prop="userName"
+            label="申请人姓名"
             align="center"
-            width="150">
-        </el-table-column>
-         <el-table-column
-            prop="address"
-            label="邮箱"
-            align="center"
-            width="230">
-        </el-table-column>
-         <el-table-column
-            prop="time"
-            label="反馈时间"
-            align="center"
-            width="150">
+            min-width="15">
         </el-table-column>
         <el-table-column
             fixed="right"
             label="操作"
-            width="90">
+            width="120">
             <template slot-scope="scope">
                 <el-button
                 @click.native.prevent="showRow(scope.$index, scope.row)"
@@ -79,15 +67,25 @@
     title="详情"
     :visible.sync="dialogVisible"
     width="30%">
-    <p><b>反馈者：</b><span>{{rowData.author}}</span></p>
-    <p><b>类型：</b><span>{{rowData.type}}</span></p>
-    <p><b>联系电话：</b><span>{{rowData.tell}}</span></p>
-    <p><b>邮箱：</b><span>{{rowData.address}}</span></p>
-    <p><b>反馈时间：</b><span>{{rowData.time}}</span></p>
-    <p><b>问题详情：</b><span>{{rowData.problem}}</span></p>
-    <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-    </span>
+        <p><b>单位名称：</b><span>{{rowData.companyName}}</span></p>
+        <p><b>对接人姓名：</b><span>{{rowData.peopleName}}</span></p>
+        <p><b>单位类型：</b><span>{{rowData.companyType | arr2string}}</span></p>
+        <p><b>岗位：</b><span>{{rowData.jobType | arr2string}}</span></p>
+        <p><b>合作范围：</b><span>{{rowData.coopRange}}</span></p>
+        <p><b>合作行业：</b><span>{{rowData.coopTrade}}</span></p>
+        <p><b>潜在合作项目：</b><span>{{rowData.coopProject}}</span></p>
+        <p><b>客户界面：</b><span>{{rowData.dahuaInterface | arr2string}}</span></p>
+        <p><b>重要程度：</b><span>{{rowData.important}}</span></p>
+        <p><b>所属区域：</b><span>{{rowData.area}}</span></p>
+        <p><b>对接人姓名：</b><span>{{rowData.peopleName2}}</span></p>
+        <p><b>对接人工号：</b><span>{{rowData.jobNumber}}</span></p>
+        <p><b>所属行业线：</b><span>{{rowData.tradeType | arr2string}}</span></p>
+        <p><b>岗位：</b><span>{{rowData.jobType2 | arr2string}}</span></p>
+        <p><b>申请人姓名：</b><span>{{rowData.userName}}</span></p>
+        <p><b>申请人联系方式：</b><span>{{rowData.userContact}}</span></p>
+        <span slot="footer" class="dialog-footer">
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
     </el-dialog>
 </div>
 </template>
@@ -100,7 +98,27 @@ export default {
             total:10,
             tableData: [],
             dialogVisible: false,
-            rowData: {}
+            rowData: {
+                //合作伙伴信息
+                componyName: '', //单位名称
+                peopleName: '',   //对接人姓名
+                componyType: [],   //单位类型(多选)
+                jobType: [],   //岗位(多选)
+                coopRange: '',   //合作范围
+                coopTrade: '',   //合作行业
+                coopProject: '',   //潜在合作项目
+                interface: [],   //客户界面(多选)
+                important: '重要',   //重要程度(单选)
+                //大华对接人员信息
+                area: '',   //所属区域
+                peopleName2: '',   //对接人姓名
+                jobNumber: '',   //对接人工号
+                tradeType: [],   //所属行业线(多选)
+                jobType2: [],   //岗位(多选)
+                //申请人信息
+                userName: '',   //申请人姓名
+                userContact: '',   //申请人联系方式
+            }
         }
     },
     methods: {
@@ -116,15 +134,9 @@ export default {
                 let list = response.data.data.userQuestions;
                 this.total = response.data.data.count;
                 for(let item of list) {
-                    this.tableData.push({
-                        problem: item.description,
-                        type: item.category,
-                        status: '未读',
-                        author: item.name,
-                        tell: item.tel,
-                        address: item.mail,
-                        time: item.date,
-                    })
+                    item.companyTypeString = item.companyType.join(", ");
+                    item.tradeTypeString = item.tradeType.join(", ");
+                    this.tableData.push(item);
                 }
             }).catch(e => {
                 console.error(e);
@@ -137,6 +149,11 @@ export default {
         showRow (index, row) {
             this.rowData = row;
             this.dialogVisible = true;
+        }
+    },
+    filters: {
+        arr2string: (value) => {
+            return value ? value.join(',') : '--';
         }
     },
     mounted () {
